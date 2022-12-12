@@ -35,7 +35,7 @@ export const CalendarModal = () => {
 	const { activeEvent, startSavingEvent } = useCalendarStore();
 
 	const [formSubmitted, setFormSubmitted] = useState(false);
-
+	// se usa para guardar los valores del formulario
 	const [formValues, setFormValues] = useState({
 		title: '',
 		notes: '',
@@ -54,14 +54,17 @@ export const CalendarModal = () => {
 			setFormValues({ ...activeEvent });
 		}
 	}, [activeEvent]);
-
+	// se usa para guardar los valores del formulario en el state
+	// target.name se usa para saber que input se esta modificando
+	// target.value se usa para saber el valor del input
 	const onInputChanged = ({ target }) => {
 		setFormValues({
 			...formValues,
 			[target.name]: target.value,
 		});
 	};
-
+	// event se usa para saber la fecha que se esta modificando
+	// changing se usa para saber que input se esta modificando el start o el end
 	const onDateChanged = (event, changing) => {
 		setFormValues({
 			...formValues,
@@ -121,6 +124,15 @@ export const CalendarModal = () => {
 			<form className='container' onSubmit={onSubmit}>
 				<div className='form-group mb-2'>
 					<label>Fecha y hora inicio</label>
+					{/*
+						selected se usa para saber que fecha esta seleccionada
+						onChange se usa para saber cuando se cambia la fecha
+						className se usa para darle estilo al input
+						dateFormat se usa para darle formato a la fecha
+						showTimeSelect se usa para mostrar la hora
+						locale se usa para darle el idioma al calendario
+						timeCaption se usa para darle el nombre a la hora
+					*/}
 					<DatePicker
 						selected={formValues.start}
 						onChange={(event) => onDateChanged(event, 'start')}
@@ -134,6 +146,9 @@ export const CalendarModal = () => {
 
 				<div className='form-group mb-2'>
 					<label>Fecha y hora fin</label>
+					{/*
+						minDate se usa para saber que fecha es la minima que se puede seleccionar
+					*/}
 					<DatePicker
 						minDate={formValues.start}
 						selected={formValues.end}
