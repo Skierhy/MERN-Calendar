@@ -37,16 +37,18 @@ export const CalendarPage = () => {
 		};
 	};
 
+	// onDoubleClick sirve para abrir el modal cuando se da doble click en un evento
 	const onDoubleClick = (event) => {
 		// console.log({ doubleClick: event });
 		openDateModal();
 	};
-
+	// onselect sirve para seleccionar un evento
 	const onSelect = (event) => {
 		// console.log({ click: event });
 		setActiveEvent(event);
 	};
-
+	// onViewChanged sirve para cambiar la vista del calendario
+	// y guardarla en el localstorage
 	const onViewChanged = (event) => {
 		localStorage.setItem('lastView', event);
 		setLastView(event);
@@ -60,6 +62,9 @@ export const CalendarPage = () => {
 			messages sirve para poner los mensajes en espanol
 			eventPropGetter sirve para darle estilo a los eventos
 			components sirve para cambiar el componente que se va a pintar en el calendario
+			onDoubleClickEvent sirve para abrir el modal cuando se da doble click en un evento
+			onSelectEvent sirve para seleccionar un evento
+			onView sirve para cambiar la vista del calendario
 			 */}
 			<Calendar
 				culture='es'
