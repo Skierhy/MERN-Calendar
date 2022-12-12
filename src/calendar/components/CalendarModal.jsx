@@ -12,6 +12,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import es from 'date-fns/locale/es';
 import { useCalendarStore, useUiStore } from '../../hooks';
 
+// se usa para darle el idioma al calendario
 registerLocale('es', es);
 
 // customStyles sirve para darle estilo al modal
@@ -129,7 +130,7 @@ export const CalendarModal = () => {
 						onChange se usa para saber cuando se cambia la fecha
 						className se usa para darle estilo al input
 						dateFormat se usa para darle formato a la fecha
-						showTimeSelect se usa para mostrar la hora
+						showTimeSelect se usa para mostrar la hora en el calendario seleccionar la hora
 						locale se usa para darle el idioma al calendario
 						timeCaption se usa para darle el nombre a la hora
 					*/}
