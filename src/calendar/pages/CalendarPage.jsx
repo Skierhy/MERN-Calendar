@@ -59,6 +59,7 @@ export const CalendarPage = () => {
 			culture sirve para cambiar el idioma al calendario
 			messages sirve para poner los mensajes en espanol
 			eventPropGetter sirve para darle estilo a los eventos
+			components sirve para cambiar el componente que se va a pintar en el calendario
 			 */}
 			<Calendar
 				culture='es'
