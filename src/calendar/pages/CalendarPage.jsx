@@ -16,7 +16,7 @@ import { useUiStore, useCalendarStore } from '../../hooks';
 export const CalendarPage = () => {
 	const { openDateModal } = useUiStore();
 	const { events, setActiveEvent } = useCalendarStore();
-
+	// lastView sirve para guardar la ultima vista del calendario
 	const [lastView, setLastView] = useState(
 		localStorage.getItem('lastView') || 'week'
 	);
@@ -65,6 +65,8 @@ export const CalendarPage = () => {
 			onDoubleClickEvent sirve para abrir el modal cuando se da doble click en un evento
 			onSelectEvent sirve para seleccionar un evento
 			onView sirve para cambiar la vista del calendario
+			defaultView sirve para cambiar la vista por defecto del calendario
+
 			 */}
 			<Calendar
 				culture='es'
