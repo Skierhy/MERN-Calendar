@@ -22,7 +22,9 @@ export const CalendarPage = () => {
 	);
 
 	// eventStyleGetter sirve para darle estilo a los eventos
+	// el evento se refiere al evento que se esta pintando en el calendario
 	const eventStyleGetter = (event, start, end, isSelected) => {
+		// style es el objeto que se le va a dar al evento
 		const style = {
 			backgroundColor: '#347CF7',
 			borderRadius: '0px',
