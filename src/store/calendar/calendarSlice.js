@@ -32,8 +32,12 @@ export const calendarSlice = createSlice({
 			state.events.push(payload);
 			state.activeEvent = null;
 		},
+		// reducer para actualizar un evento
 		onUpdateEvent: (state, { payload }) => {
+			// Buscar el evento en el arreglo de eventos
 			state.events = state.events.map((event) => {
+				// Si el id del evento es igual al id del payload
+				// entonces reemplazar el evento con el payload
 				if (event._id === payload._id) {
 					return payload;
 				}
