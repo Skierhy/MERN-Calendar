@@ -30,7 +30,7 @@ export const useCalendarStore = () => {
 			);
 		}
 	};
-
+	// Eliminar el evento
 	const startDeletingEvent = () => {
 		// Todo: Llegar al backend
 
@@ -41,6 +41,8 @@ export const useCalendarStore = () => {
 		//* Propiedades
 		activeEvent,
 		events,
+		// Comprobar si hay un evento activo
+		// !!activeEvent devuelve true si activeEvent es diferente de null
 		hasEventSelected: !!activeEvent,
 
 		//* Métodos

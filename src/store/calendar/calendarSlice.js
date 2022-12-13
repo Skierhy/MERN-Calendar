@@ -45,11 +45,15 @@ export const calendarSlice = createSlice({
 				return event;
 			});
 		},
+		// reducer para eliminar un evento
 		onDeleteEvent: (state) => {
+			// Si hay un evento activo esa vamos a eliminarlo
 			if (state.activeEvent) {
+				// Filtrar el arreglo de eventos y eliminar el evento activo
 				state.events = state.events.filter(
 					(event) => event._id !== state.activeEvent._id
 				);
+				// Establecer el evento activo en null
 				state.activeEvent = null;
 			}
 		},
