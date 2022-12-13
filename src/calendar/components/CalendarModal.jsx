@@ -32,6 +32,7 @@ Modal.setAppElement('#root');
 
 export const CalendarModal = () => {
 	// se usa para abrir y cerrar el modal
+	// usando el hook useUiStore
 	const { isDateModalOpen, closeDateModal } = useUiStore();
 	const { activeEvent, startSavingEvent } = useCalendarStore();
 
