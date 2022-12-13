@@ -7,6 +7,8 @@ export const store = configureStore({
 		calendar: calendarSlice.reducer,
 		ui: uiSlice.reducer,
 	},
+	// Para evitar el error de serializableCheck
+	// el serializableCheck es una comprobación que hace redux para ver si el estado es serializable
 	middleware: (getDefaultMiddleware) =>
 		getDefaultMiddleware({
 			serializableCheck: false,
