@@ -56,10 +56,13 @@ export const CalendarModal = () => {
 		// o cuando el formulario sea enviado
 	}, [formValues.title, formSubmitted]);
 
+	// el useEffect sirve para saber cuando el evento cambie
 	useEffect(() => {
+		// si el evento es diferente de null
 		if (activeEvent !== null) {
 			setFormValues({ ...activeEvent });
 		}
+		// se usa para que se vuelva a renderizar cuando el evento cambie
 	}, [activeEvent]);
 	// se usa para guardar los valores del formulario en el state
 	// target.name se usa para saber que input se esta modificando

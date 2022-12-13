@@ -10,6 +10,7 @@ export const useCalendarStore = () => {
 	const dispatch = useDispatch();
 	const { events, activeEvent } = useSelector((state) => state.calendar);
 
+	// establecer el evento activo
 	const setActiveEvent = (calendarEvent) => {
 		dispatch(onSetActiveEvent(calendarEvent));
 	};
