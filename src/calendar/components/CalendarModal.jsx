@@ -76,17 +76,19 @@ export const CalendarModal = () => {
 	const onCloseModal = () => {
 		closeDateModal();
 	};
-
+	// se usa para guardar el evento
 	const onSubmit = async (event) => {
 		event.preventDefault();
 		setFormSubmitted(true);
-
+		// se usa para saber la diferencia entre las fechas
 		const difference = differenceInSeconds(
 			formValues.end,
 			formValues.start
 		);
-
+		// se usa para saber si la fecha de inicio es mayor a la fecha de fin
 		if (isNaN(difference) || difference <= 0) {
+			// sweetalert2
+			// swal.fire se usa para mostrar un mensaje de error
 			Swal.fire(
 				'Fechas incorrectas',
 				'Revisar las fechas ingresadas',
@@ -94,7 +96,7 @@ export const CalendarModal = () => {
 			);
 			return;
 		}
-
+		// se usa para saber si el titulo esta vació
 		if (formValues.title.length <= 0) return;
 
 		console.log(formValues);
