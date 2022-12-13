@@ -35,6 +35,7 @@ export const CalendarModal = () => {
 	const { isDateModalOpen, closeDateModal } = useUiStore();
 	const { activeEvent, startSavingEvent } = useCalendarStore();
 
+	// se usa para saber si el formulario fue enviado
 	const [formSubmitted, setFormSubmitted] = useState(false);
 	// se usa para guardar los valores del formulario
 	const [formValues, setFormValues] = useState({
@@ -43,11 +44,15 @@ export const CalendarModal = () => {
 		start: new Date(),
 		end: addHours(new Date(), 2),
 	});
-
+	// se usa para saber si el titulo esta vació
 	const titleClass = useMemo(() => {
 		if (!formSubmitted) return '';
-
+		// se usa para saber si el titulo esta vació y darle un estilo
+		// si el titulo esta vació se le da el estilo is-invalid
+		// si el titulo no esta vació se le da el estilo ''
 		return formValues.title.length > 0 ? '' : 'is-invalid';
+		// se usa para que se vuelva a renderizar cuando el titulo cambie
+		// o cuando el formulario sea enviado
 	}, [formValues.title, formSubmitted]);
 
 	useEffect(() => {
