@@ -111,8 +111,11 @@ export const CalendarModal = () => {
 		console.log(formValues);
 
 		// TODO:
+		// empezar el guardado
 		await startSavingEvent(formValues);
+		// se usa para cerrar el modal
 		closeDateModal();
+		// se usa para reiniciar el formulario
 		setFormSubmitted(false);
 	};
 

@@ -14,11 +14,12 @@ export const useCalendarStore = () => {
 	const setActiveEvent = (calendarEvent) => {
 		dispatch(onSetActiveEvent(calendarEvent));
 	};
-
+	// Guardar el evento
 	const startSavingEvent = async (calendarEvent) => {
 		// TODO: llegar al backend
 
 		// Todo bien
+		// revisar si el evento tiene un id para ver si es uno nuevo o uno existente
 		if (calendarEvent._id) {
 			// Actualizando
 			dispatch(onUpdateEvent({ ...calendarEvent }));
