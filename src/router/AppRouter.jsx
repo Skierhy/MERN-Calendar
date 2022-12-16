@@ -1,16 +1,26 @@
+import { useEffect } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 
 import { LoginPage } from '../auth';
 import { CalendarPage } from '../calendar';
+import { useAuthStore } from '../hooks';
 
 export const AppRouter = () => {
-	const authStatus = 'not-authenticated'; // 'authenticated'; // 'not-authenticated';
+	const { status, checkAuthToken } = useAuthStore();
+	// const authStatus = 'not-authenticated'; // 'authenticated'; // 'not-authenticated';
 
+	useEffect(() => {
+		checkAuthToken();
+	}, []);
+
+	if (status === 'checking') {
+		return <h3>Cargando...</h3>;
+	}
 	return (
 		// routes sirve para renderizar las rutas
 		<Routes>
 			{/* checa si esta autentificado */}
-			{authStatus === 'not-authenticated' ? (
+			{status === 'not-authenticated' ? (
 				// estarán aquí las rutas que no requieren autenticación
 				// login y register
 				<Route path='/auth/*' element={<LoginPage />} />
