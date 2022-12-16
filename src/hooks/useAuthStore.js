@@ -39,19 +39,30 @@ export const useAuthStore = () => {
 		}
 	};
 
+	// startRegister se encarga de hacer la petición al backend para registrar un nuevo usuario
 	const startRegister = async ({ email, password, name }) => {
+		// disparamos una acción para que indice que esta revisando el email password y name
 		dispatch(onChecking());
+		// como es una petición entonces puede fallar
 		try {
+			// hacemos la petición al backend post a /auth/new y su body es un objeto con email, password y name
 			const { data } = await calendarApi.post('/auth/new', {
 				email,
 				password,
 				name,
 			});
+			// guarda el token en el localStorage
 			localStorage.setItem('token', data.token);
+			// guarda la fecha en la que se hizo el login para poder hacer la validación del token
 			localStorage.setItem('token-init-date', new Date().getTime());
+			// disparamos la acción onLogin para cambiar el estado de la store a authenticated
+			// y guardamos el nombre y el uid del usuario en el state de la store
 			dispatch(onLogin({ name: data.name, uid: data.uid }));
 		} catch (error) {
+			// disparamos la acción onLogout para cambiar el estado de la store a not-authenticated
+			// si no viene un mensaje de error en la respuesta del backend entonces se muestra un mensaje genérico
 			dispatch(onLogout(error.response.data?.msg || '--'));
+			// y después de 10ms disparamos la acción clearErrorMessage para limpiar el mensaje de error
 			setTimeout(() => {
 				dispatch(clearErrorMessage());
 			}, 10);
