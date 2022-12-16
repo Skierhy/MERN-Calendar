@@ -4,7 +4,7 @@ import { LoginPage } from '../auth';
 import { CalendarPage } from '../calendar';
 
 export const AppRouter = () => {
-	const authStatus = 'authenticated'; // 'authenticated'; // 'not-authenticated';
+	const authStatus = 'not-authenticated'; // 'authenticated'; // 'not-authenticated';
 
 	return (
 		// routes sirve para renderizar las rutas
