@@ -13,6 +13,7 @@ export const useAuthStore = () => {
 	// que lo requiera
 	// startLogin se encarga de hacer la petición al backend para iniciar sesión
 	const startLogin = async ({ email, password }) => {
+		// disparamos la acción onChecking para cambiar el estado de la store a checking
 		dispatch(onChecking());
 		// try catch para manejar errores por si la petición falla
 		try {
@@ -23,10 +24,15 @@ export const useAuthStore = () => {
 			});
 			// si la petición es exitosa guardamos el token en el localStorage
 			localStorage.setItem('token', data.token);
+			// guardamos la fecha en la que se hizo el login para poder hacer la validación del token
 			localStorage.setItem('token-init-date', new Date().getTime());
+			// disparamos la acción onLogin para cambiar el estado de la store a authenticated
+			// y guardamos el nombre y el uid del usuario en el state de la store
 			dispatch(onLogin({ name: data.name, uid: data.uid }));
 		} catch (error) {
+			// si la petición falla disparamos la acción onLogout para cambiar el estado de la store a not-authenticated
 			dispatch(onLogout('Credenciales incorrectas'));
+			// y después de 10ms disparamos la acción clearErrorMessage para limpiar el mensaje de error
 			setTimeout(() => {
 				dispatch(clearErrorMessage());
 			}, 10);

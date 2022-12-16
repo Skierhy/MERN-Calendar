@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+import Swal from 'sweetalert2';
 import { useAuthStore } from '../../hooks';
 import { useForm } from '../../hooks/useForm';
 import './LoginPage.css';
@@ -19,7 +21,8 @@ const registerFormFields = {
 };
 
 export const LoginPage = () => {
-	const { startLogin } = useAuthStore();
+	// useAuthStore es un hook que nos permite hacer las peticiones al backend sin usar tonks
+	const { startLogin, errorMessage, startRegister } = useAuthStore();
 	// onLoginInputChange y onRegisterInputChange son funciones que se encargan de actualizar el estado de los campos de los formularios
 	const {
 		loginEmail,
@@ -50,6 +53,12 @@ export const LoginPage = () => {
 			registerPassword2,
 		});
 	};
+
+	useEffect(() => {
+		if (errorMessage !== undefined) {
+			Swal.fire('Error en la autenticación', errorMessage, 'error');
+		}
+	}, [errorMessage]);
 
 	return (
 		<div className='container login-container'>
