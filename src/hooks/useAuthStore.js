@@ -93,7 +93,7 @@ export const useAuthStore = () => {
 			dispatch(onLogout());
 		}
 	};
-
+	// startLogout se encarga de limpiar el localStorage y dispara la acción onLogout para cambiar el estado de la store a not-authenticated
 	const startLogout = () => {
 		localStorage.clear();
 		dispatch(onLogout());

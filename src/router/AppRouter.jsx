@@ -21,17 +21,22 @@ export const AppRouter = () => {
 		<Routes>
 			{/* checa si esta autentificado */}
 			{status === 'not-authenticated' ? (
-				// estarán aquí las rutas que no requieren autenticación
-				// login y register
-				<Route path='/auth/*' element={<LoginPage />} />
+				<>
+					{/*estarán aquí las rutas que no requieren autenticación //
+					login y register */}
+					<Route path='/auth/*' element={<LoginPage />} />
+					{/* si no encuentra la ruta se va a direccional a  /auth/login*/}
+					{/* cuando no estas  authenticated siempre te mostrara login es una prueba de fallos*/}
+					<Route path='/*' element={<Navigate to='/auth/login' />} />
+				</>
 			) : (
-				// estarán aquí las rutas que requieren autenticación
-				// calendar
-				<Route path='/*' element={<CalendarPage />} />
+				<>
+					{/* estarán aquí las rutas que requieren autenticación //
+					calendar */}
+					<Route path='/' element={<CalendarPage />} />
+					<Route path='/*' element={<Navigate to='/' />} />
+				</>
 			)}
-			{/* si no encuentra la ruta se va a direccional a  /auth/login*/}
-			{/* cuando no estas  authenticated siempre te mostrara login es una prueba de fallos*/}
-			<Route path='/*' element={<Navigate to='/auth/login' />} />
 		</Routes>
 	);
 };
