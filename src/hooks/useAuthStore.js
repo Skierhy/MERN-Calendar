@@ -1,6 +1,12 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { calendarApi } from '../api';
-import { clearErrorMessage, onChecking, onLogin, onLogout } from '../store';
+import {
+	clearErrorMessage,
+	onChecking,
+	onLogin,
+	onLogout,
+	onLogoutCalendar,
+} from '../store';
 
 export const useAuthStore = () => {
 	// usaremos el hook useSelector para poder leer el estado de la store en el state de auth
@@ -96,6 +102,7 @@ export const useAuthStore = () => {
 	// startLogout se encarga de limpiar el localStorage y dispara la acción onLogout para cambiar el estado de la store a not-authenticated
 	const startLogout = () => {
 		localStorage.clear();
+		dispatch(onLogoutCalendar());
 		dispatch(onLogout());
 	};
 

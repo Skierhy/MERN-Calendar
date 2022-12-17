@@ -1,4 +1,4 @@
-import { useCalendarStore, useUiStore } from '../../hooks';
+import { useCalendarStore } from '../../hooks';
 
 // este componente es el botón de eliminar evento
 export const FabDelete = () => {
