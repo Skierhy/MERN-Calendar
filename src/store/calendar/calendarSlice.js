@@ -1,24 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { addHours } from 'date-fns';
-
-// Temporal event por que se va a leer del backend
-const tempEvent = {
-	_id: new Date().getTime(),
-	title: 'Cumpleaños del Jefe',
-	notes: 'Hay que comprar el pastel',
-	start: new Date(),
-	end: addHours(new Date(), 2),
-	bgColor: '#fafafa',
-	user: {
-		_id: '123',
-		name: 'Fernando',
-	},
-};
 
 export const calendarSlice = createSlice({
 	name: 'calendar',
 	initialState: {
-		events: [tempEvent],
+		isLoadingEvents: true,
+		events: [],
 		activeEvent: null,
 	},
 	reducers: {
@@ -38,7 +24,7 @@ export const calendarSlice = createSlice({
 			state.events = state.events.map((event) => {
 				// Si el id del evento es igual al id del payload
 				// entonces reemplazar el evento con el payload
-				if (event._id === payload._id) {
+				if (event.id === payload.id) {
 					return payload;
 				}
 
@@ -51,15 +37,43 @@ export const calendarSlice = createSlice({
 			if (state.activeEvent) {
 				// Filtrar el arreglo de eventos y eliminar el evento activo
 				state.events = state.events.filter(
-					(event) => event._id !== state.activeEvent._id
+					(event) => event.id !== state.activeEvent.id
 				);
 				// Establecer el evento activo en null
 				state.activeEvent = null;
 			}
 		},
+		// reducer para cargar los eventos
+		onLoadEvents: (state, { payload = [] }) => {
+			state.isLoadingEvents = false;
+			// state.events = payload;
+			/* Comprobando si el evento existe en la base de datos. */
+			payload.forEach((event) => {
+				// some() devuelve true si al menos un elemento del arreglo cumple con la condición
+				const exists = state.events.some(
+					(dbEvent) => dbEvent.id === event.id
+				);
+				// Si el evento no existe en la base de datos
+				// entonces agregarlo al arreglo de eventos
+				if (!exists) {
+					state.events.push(event);
+				}
+			});
+		},
+		onLogoutCalendar: (state) => {
+			state.isLoadingEvents = true;
+			state.events = [];
+			state.activeEvent = null;
+		},
 	},
 });
 
 // Action creators are generated for each case reducer function
-export const { onSetActiveEvent, onAddNewEvent, onUpdateEvent, onDeleteEvent } =
-	calendarSlice.actions;
+export const {
+	onSetActiveEvent,
+	onAddNewEvent,
+	onUpdateEvent,
+	onDeleteEvent,
+	onLoadEvents,
+	onLogoutCalendar,
+} = calendarSlice.actions;

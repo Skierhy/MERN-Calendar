@@ -108,7 +108,7 @@ export const CalendarModal = () => {
 		// se usa para saber si el titulo esta vació
 		if (formValues.title.length <= 0) return;
 
-		console.log(formValues);
+		// console.log(formValues);
 
 		// TODO:
 		// empezar el guardado

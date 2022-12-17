@@ -1,6 +1,12 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { calendarApi } from '../api';
-import { clearErrorMessage, onChecking, onLogin, onLogout } from '../store';
+import {
+	clearErrorMessage,
+	onChecking,
+	onLogin,
+	onLogout,
+	onLogoutCalendar,
+} from '../store';
 
 export const useAuthStore = () => {
 	// usaremos el hook useSelector para poder leer el estado de la store en el state de auth
@@ -69,23 +75,34 @@ export const useAuthStore = () => {
 		}
 	};
 
+	// checkAuthToken se encarga de revisar si el token es válido
 	const checkAuthToken = async () => {
+		//  guardamos el token en una constante de localStorage
 		const token = localStorage.getItem('token');
+		// si no hay token entonces disparamos la acción onLogout para cambiar el estado de la store a not-authenticated
 		if (!token) return dispatch(onLogout());
-
+		// como es una petición entonces puede fallar usando try catch
 		try {
+			// hacemos la petición al backend get a /auth/renew
 			const { data } = await calendarApi.get('auth/renew');
+			// si la petición es exitosa guardamos el token en el localStorage
 			localStorage.setItem('token', data.token);
+			// guardamos la fecha en la que se hizo el login para poder hacer la validación del token
 			localStorage.setItem('token-init-date', new Date().getTime());
+			// disparamos la acción onLogin para cambiar el estado de la store a authenticated
+			// y guardamos el nombre y el uid del usuario en el state de la store
 			dispatch(onLogin({ name: data.name, uid: data.uid }));
 		} catch (error) {
+			// si la petición falla disparamos la acción onLogout para cambiar el estado de la store a not-authenticated
+			// esto lo que hace es si se vuelve a verificar el token y este ya no es válido entonces se limpia el localStorage
 			localStorage.clear();
 			dispatch(onLogout());
 		}
 	};
-
+	// startLogout se encarga de limpiar el localStorage y dispara la acción onLogout para cambiar el estado de la store a not-authenticated
 	const startLogout = () => {
 		localStorage.clear();
+		dispatch(onLogoutCalendar());
 		dispatch(onLogout());
 	};
 
