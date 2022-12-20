@@ -11,6 +11,7 @@ export const FabDelete = () => {
 
 	return (
 		<button
+			aria-label='btn-delete'
 			className='btn btn-danger fab-danger'
 			onClick={handleDelete}
 			// si no hay evento seleccionado, el botón no se muestra
