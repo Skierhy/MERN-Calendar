@@ -11,6 +11,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 
 import es from 'date-fns/locale/es';
 import { useCalendarStore, useUiStore } from '../../hooks';
+import { getEnvVariables } from '../../helpers';
 
 // se usa para darle el idioma al calendario
 registerLocale('es', es);
@@ -28,7 +29,9 @@ const customStyles = {
 };
 // es elemento que se va a renderizar en el modal el principal
 // se encuentra en el index.html
-Modal.setAppElement('#root');
+if (getEnvVariables().VITE_MODE !== 'test') {
+	Modal.setAppElement('#root');
+}
 
 export const CalendarModal = () => {
 	// se usa para abrir y cerrar el modal

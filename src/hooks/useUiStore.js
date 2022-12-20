@@ -20,7 +20,7 @@ export const useUiStore = () => {
 
 	// alternamos el modal
 	const toggleDateModal = () => {
-		isDateModalOpen ? openDateModal() : closeDateModal();
+		isDateModalOpen ? closeDateModal() : openDateModal();
 	};
 
 	return {
