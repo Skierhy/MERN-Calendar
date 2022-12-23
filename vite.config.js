@@ -5,7 +5,7 @@ import react from '@vitejs/plugin-react';
 export default defineConfig({
 	plugins: [react()],
 	// usar base para netlify y para express quitarlo
-	base: './',
+	// base: './',
 	// build: {
 	// 	outDir: './docs',
 	// },
