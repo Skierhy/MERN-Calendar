@@ -1,6 +1,7 @@
 # Calendar App
 
 Este proyecto fue hecho en React, con el fin de practicar y aprender sobre React.
+El cual es el calendario utilizando MERN esta parte es el Frontend.
 
 ## Notas
 
